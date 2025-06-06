@@ -4,7 +4,7 @@
 
 @section('content')
     <div class="max-w-2xl mx-auto p-6 bg-white rounded-lg shadow-md my-8">
-        <h1 class="text-3xl font-bold text-gray-800 mb-6">Déjanos un mensaje</h1>
+        <h1 class="text-3xl font-bold text-gray-800 mb-6">Atencion al usuario</h1>
 
         <form action="{{ route('contactanos.store') }}" method="POST" class="space-y-4">
             @csrf

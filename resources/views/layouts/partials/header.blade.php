@@ -5,11 +5,11 @@
                 Sistema de gestión de residuos de la Municipalidad Provincial de Huari
             </div>
             <div class="space-x-6">
-                <a href="{{route('inicio')}}" class="{{request()->routeIs('inicio') ? 'active' : ''}}">Inicio</a>
+                <!-- <a href="{{route('inicio')}}" class="{{request()->routeIs('inicio') ? 'active' : ''}}">Inicio</a> -->
                 <a href="{{route('quienes-somos')}}" class="{{request()->routeIs('quienes-somos') ? 'active' : ''}}">Quienes Somos</a>
                 <a href="{{route('reciclaje')}}" class="{{request()->routeIs('reciclaje') ? 'active' : ''}}">Reciclaje</a>
                 <a href="{{route('recompensas')}}" class="{{request()->routeIs('recompensas') ? 'active' : ''}}">Recompensas</a>
-                <a href="{{route('contactanos.index')}}" class="{{request()->routeIs('contactanos.index') ? 'active' : ''}}">Contactanos</a>
+                <a href="{{route('contactanos.index')}}" class="{{request()->routeIs('contactanos.index') ? 'active' : ''}}">Atencion al usuario</a>
 
                 @auth
                 <!-- Botón de cerrar sesión solo si el usuario está autenticado -->

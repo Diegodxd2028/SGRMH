@@ -25,12 +25,6 @@
     <section class="mb-12">
         <h2 class="text-xl font-semibold text-gray-800 border-b pb-2 mb-6">Recompensas Disponibles</h2>
         
-        <!-- Filtros -->
-        <div class="flex flex-wrap gap-4 mb-6">
-            <button class="px-4 py-2 bg-green-500 text-white rounded-full text-sm font-medium hover:bg-green-600 transition">Todas</button>
-            <button class="px-4 py-2 bg-gray-200 text-gray-700 rounded-full text-sm font-medium hover:bg-gray-300 transition">Más populares</button>
-            <button class="px-4 py-2 bg-gray-200 text-gray-700 rounded-full text-sm font-medium hover:bg-gray-300 transition">Para ti</button>
-        </div>
 
         <!-- Grid de Recompensas -->
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">

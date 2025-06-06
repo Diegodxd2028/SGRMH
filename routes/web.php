@@ -37,16 +37,6 @@ Route::get('/recompensas', [RecompensasController::class, 'index'])
     ->middleware('auth')
     ->name('recompensas');
 
-Route::post('/recompensas/canjear/{codRecom}', [CanjesController::class, 'canjear'])
-    ->middleware('auth')
-    ->name('recompensas.canjear');
-
-// Historial de canjes
-Route::get('/canjes/historial', [CanjesController::class, 'historial'])
-    ->middleware('auth')
-    ->name('canjes.historial');
-
-
 // Participación ciudadana
 Route::get('/participacion', [ParticipacionController::class, 'index'])->name('participacion');
 
