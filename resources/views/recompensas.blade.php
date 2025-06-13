@@ -1,4 +1,4 @@
-@extends('layouts.plantilla')
+@extends('layouts.plantilla_usuario')
 
 @section('title', 'Recompensas')
 

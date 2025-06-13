@@ -10,7 +10,7 @@ use App\Http\Controllers\ContactanosController;
 use App\Mail\ContactanosMailable;
 use Illuminate\Support\Facades\Mail;
 use App\Http\Controllers\CanjesController;
-use Illuminate\Validation\Rules\Can;
+use App\Http\Controllers\AdminController; // <--- NUEVO
 
 // Pantalla previa para elegir tipo de acceso
 Route::get('/', function () {
@@ -58,3 +58,12 @@ Route::post('contactanos', [ContactanosController::class, 'store'])->name('conta
 
 // Canje de recompensas
 Route::post('/recompensas/{recompensa}/canjear', [RecompensasController::class, 'canjear'])->name('recompensas.canjear');
+
+// ------------------- RUTAS EXCLUSIVAS PARA ADMIN -------------------
+Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(function () {
+    Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('dashboard');
+    Route::get('/mensajes', [AdminController::class, 'mensajes'])->name('mensajes');
+    Route::get('/canjes', [AdminController::class, 'canjes'])->name('canjes');
+    Route::get('/puntos', [AdminController::class, 'mostrarFormularioPuntos'])->name('puntos');
+    Route::post('/puntos', [AdminController::class, 'asignarPuntos'])->name('puntos.asignar');
+});

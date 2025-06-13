@@ -15,14 +15,15 @@ return new class extends Migration
             // Primary key
             $table->id('CODCanje');
             
-            // Foreign keys
-            $table->integer('DNI_usuario');
+            // Foreign key: Usuario
+            $table->unsignedBigInteger('DNI_usuario');
             $table->foreign('DNI_usuario')
                   ->references('DNI')
                   ->on('users')
                   ->onDelete('cascade')
                   ->onUpdate('cascade');
-                  
+            
+            // Foreign key: Recompensa
             $table->unsignedBigInteger('CodRecom');
             $table->foreign('CodRecom')
                   ->references('CodRecom')
@@ -31,13 +32,13 @@ return new class extends Migration
                   ->onUpdate('cascade');
             
             // Datos del canje
-            $table->integer('PuntosUtilizados')->unsigned();
-            $table->integer('Cantidad')->unsigned()->default(1);
+            $table->unsignedInteger('PuntosUtilizados');
+            $table->unsignedInteger('Cantidad')->default(1);
             $table->timestamp('FechaCanje')->useCurrent();
             
             // Auditoría
             $table->timestamps();
-            
+
             // Index para mejor performance
             $table->index('DNI_usuario');
             $table->index('CodRecom');

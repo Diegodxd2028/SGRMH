@@ -28,7 +28,7 @@ class AuthController extends Controller
         $credentials['rol'] = 'usuario';
 
         if (Auth::attempt($credentials)) {
-            return redirect()->route('inicio');
+            return redirect()->route('inicio'); // Usuario redirigido a ruta principal
         }
 
         return redirect()->back()->with('error', 'Credenciales incorrectas o no tiene rol de usuario.');
@@ -41,7 +41,7 @@ class AuthController extends Controller
         $credentials['rol'] = 'admin';
 
         if (Auth::attempt($credentials)) {
-            return redirect()->route('inicio');
+            return redirect()->route('admin.dashboard'); // Admin redirigido a dashboard
         }
 
         return redirect()->back()->with('error', 'Credenciales incorrectas o no tiene rol de administrador.');
@@ -76,7 +76,7 @@ class AuthController extends Controller
             'Celular' => $validatedData['Celular'],
             'email' => $validatedData['email'],
             'password' => Hash::make($validatedData['password']),
-            'rol' => 'usuario', // asigna rol de usuario por defecto
+            'rol' => 'usuario', // rol por defecto
         ]);
 
         Auth::login($user);

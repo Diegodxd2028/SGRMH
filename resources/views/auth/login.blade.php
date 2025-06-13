@@ -1,4 +1,4 @@
-@extends('layouts.plantilla')
+@extends('layouts.plantilla_auth')
 
 @section('title', 'Iniciar Sesión')
 
@@ -15,7 +15,6 @@
 
         <!-- Columna derecha: Formulario + título -->
         <div class="w-full md:w-1/2 p-8">
-            <!-- TÍTULO PRINCIPAL -->
             <h1 class="text-xl font-bold text-center mb-2">Municipalidad de Huari</h1>
             <h2 class="text-2xl font-semibold text-center mb-6">
                 Iniciar Sesión @if(isset($rol) && $rol === 'admin') (Administrador) @else (Usuario) @endif
