@@ -9,8 +9,8 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ContactanosController;
 use App\Mail\ContactanosMailable;
 use Illuminate\Support\Facades\Mail;
-use App\Http\Controllers\CanjesController;
-use App\Http\Controllers\AdminController; // <--- NUEVO
+use App\Http\Controllers\CanjeController;
+use App\Http\Controllers\AdminController;
 
 // Pantalla previa para elegir tipo de acceso
 Route::get('/', function () {
@@ -42,9 +42,7 @@ Route::get('/quienes-somos', [HomeController::class, 'quienesSomos'])->name('qui
 Route::get('/reciclaje', [ReciclajeController::class, 'index'])->name('reciclaje');
 
 // Recompensas
-Route::get('/recompensas', [RecompensasController::class, 'index'])
-    ->middleware('auth')
-    ->name('recompensas');
+Route::get('/recompensas', [RecompensasController::class, 'index'])->middleware('auth')->name('recompensas');
 
 // Participación ciudadana
 Route::get('/participacion', [ParticipacionController::class, 'index'])->name('participacion');
@@ -56,8 +54,8 @@ Route::view('nosotros', 'nosotros')->name('nosotros');
 Route::get('contactanos', [ContactanosController::class, 'index'])->name('contactanos.index');
 Route::post('contactanos', [ContactanosController::class, 'store'])->name('contactanos.store');
 
-// Canje de recompensas
-Route::post('/recompensas/{recompensa}/canjear', [RecompensasController::class, 'canjear'])->name('recompensas.canjear');
+// ✅ NUEVA RUTA para canje de recompensas con CanjesController
+Route::post('/canjes', [CanjeController::class, 'store'])->name('canjes.store')->middleware('auth');
 
 // ------------------- RUTAS EXCLUSIVAS PARA ADMIN -------------------
 Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(function () {

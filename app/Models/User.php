@@ -12,11 +12,6 @@ class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array<int, string>
-     */
     protected $fillable = [
         'DNI',
         'name',
@@ -27,28 +22,26 @@ class User extends Authenticatable
         'email',
         'password',
         'Puntos',
-        'rol' // <--- Agregado
+        'rol'
     ];
 
-    /**
-     * The attributes that should be hidden for serialization.
-     *
-     * @var array<int, string>
-     */
     protected $hidden = [
         'password',
         'remember_token',
     ];
 
-    /**
-     * The attributes that should be cast.
-     *
-     * @var array<string, string>
-     */
     protected $casts = [
         'email_verified_at' => 'datetime',
         'DNI' => 'integer',
         'Celular' => 'integer',
         'Puntos' => 'integer'
     ];
+
+    /**
+     * Relación: un usuario tiene muchos canjes
+     */
+    public function canjes()
+    {
+        return $this->hasMany(Canje::class, 'DNI_usuario', 'DNI');
+    }
 }

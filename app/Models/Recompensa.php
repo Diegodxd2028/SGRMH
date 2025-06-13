@@ -138,4 +138,12 @@ class Recompensa extends Model
     {
         return $this->Stock > 0;
     }
+
+    /**
+     * Relación: una recompensa tiene muchos canjes
+     */
+    public function canjes()
+    {
+        return $this->hasMany(Canje::class, 'CodRecom', 'CodRecom');
+    }
 }

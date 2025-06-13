@@ -35,30 +35,4 @@ class RecompensasController extends Controller
             'recompensas' => $recompensas
         ]);
     }
-
-    public function canjear(Recompensa $recompensa)
-    {
-        $usuario = Auth::user();
-
-        // Validaciones
-        if (!$recompensa->isAvailable()) {
-            return redirect()->back()->with('error', 'La recompensa no está disponible.');
-        }
-
-        if (!$recompensa->isActive()) {
-            return redirect()->back()->with('error', 'La recompensa ya no está activa.');
-        }
-
-        if ($usuario->Puntos < $recompensa->PuntosNecesarios) {
-            return redirect()->back()->with('error', 'No tienes puntos suficientes para canjear esta recompensa.');
-        }
-
-        // Descontar puntos y reducir stock
-        $usuario->Puntos -= $recompensa->PuntosNecesarios;
-
-        $recompensa->Stock -= 1;
-        $recompensa->save();
-
-        return redirect()->back()->with('success', '¡Has canjeado la recompensa con éxito!');
-    }
 }

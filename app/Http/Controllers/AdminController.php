@@ -22,7 +22,7 @@ class AdminController extends Controller
 
     public function canjes()
     {
-        $canjes = Canje::with('usuario', 'recompensa')->latest()->get();
+        $canjes = Canje::with('recompensa', 'usuario')->get();
         return view('admin.canjes', compact('canjes'));
     }
 

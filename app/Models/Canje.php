@@ -9,8 +9,8 @@ class Canje extends Model
 {
     use HasFactory;
 
-    protected $primaryKey = 'CODCanje';
-    public $timestamps = true;
+    // ✅ Usamos la clave primaria por defecto "id", así que quitamos esta línea:
+    // protected $primaryKey = 'CODCanje';
 
     protected $fillable = [
         'DNI_usuario',
