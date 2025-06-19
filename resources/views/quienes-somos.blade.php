@@ -153,7 +153,7 @@
             </div>
             <div class="p-6 flex-grow">
                 <h3 class="text-xl font-bold text-gray-800">Ing. Sistemas Tatiana Vega</h3>
-                <p class="text-green-600 font-medium mb-2">Líder de Proyecto</p>
+                <p class="text-green-600 font-medium mb-2">Desarrollador de Software</p>
                 <p class="text-gray-600 text-sm">Responsable del programa de reciclaje municipal.</p>
             </div>
         </div>
@@ -181,7 +181,7 @@
             </div>
             <div class="p-6 flex-grow">
                 <h3 class="text-xl font-bold text-gray-800">Ing. Sistemas Diego Curi</h3>
-                <p class="text-green-600 font-medium mb-2">Tester y Documentación</p>
+                <p class="text-green-600 font-medium mb-2">Desarrollador de Software</p>
                 <p class="text-gray-600 text-sm">Responsable de calidad y documentación del sistema.</p>
             </div>
         </div>
@@ -195,7 +195,7 @@
             </div>
             <div class="p-6 flex-grow">
                 <h3 class="text-xl font-bold text-gray-800">Ing. Sistemas Paytan Jheyson</h3>
-                <p class="text-green-600 font-medium mb-2">Tester y Documentación</p>
+                <p class="text-green-600 font-medium mb-2">Desarrollador de Software</p>
                 <p class="text-gray-600 text-sm">Encargado de pruebas y documentación técnica.</p>
             </div>
         </div>

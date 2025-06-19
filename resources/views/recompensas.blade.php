@@ -75,23 +75,51 @@
         </div>
     </section>
 
-    <!-- Sección de Puntos -->
-    <section class="bg-white rounded-xl shadow-md p-6">
-        <h2 class="text-xl font-semibold text-gray-800 mb-4">¿Cómo ganar más puntos?</h2>
-        <ul class="space-y-3">
-            <li class="flex items-start">
-                <div class="flex-shrink-0 h-6 w-6 text-green-500 mr-2">✓</div>
-                <p class="text-gray-700">+10 puntos por cada kg de material reciclado</p>
-            </li>
-            <li class="flex items-start">
-                <div class="flex-shrink-0 h-6 w-6 text-green-500 mr-2">✓</div>
-                <p class="text-gray-700">+50 puntos por participar en eventos</p>
-            </li>
-            <li class="flex items-start">
-                <div class="flex-shrink-0 h-6 w-6 text-green-500 mr-2">✓</div>
-                <p class="text-gray-700">+5 puntos por día al registrar actividad</p>
-            </li>
+    <!-- Sección de Puntos Actualizada -->
+<section class="bg-white rounded-xl shadow-md p-6">
+    <h2 class="text-xl font-semibold text-gray-800 mb-6">¿Cómo ganar más puntos?</h2>
+
+    <div class="overflow-x-auto">
+        <table class="min-w-full bg-white border border-gray-200 rounded-lg">
+            <thead class="bg-green-100">
+                <tr>
+                    <th class="py-3 px-4 text-left text-gray-700 font-semibold">Tipo de Residuo</th>
+                    <th class="py-3 px-4 text-left text-gray-700 font-semibold">Cantidad</th>
+                    <th class="py-3 px-4 text-left text-gray-700 font-semibold">Puntos Obtenidos</th>
+                    <th class="py-3 px-4 text-left text-gray-700 font-semibold">Ejemplo</th>
+                </tr>
+            </thead>
+            <tbody class="divide-y divide-gray-200">
+                <tr>
+                    <td class="py-3 px-4 text-gray-800">Papel y Cartón</td>
+                    <td class="py-3 px-4">0.5 kg</td>
+                    <td class="py-3 px-4">5 puntos</td>
+                    <td class="py-3 px-4 text-sm text-gray-600">Si entregas 1 kg de papel, ganas 10 puntos</td>
+                </tr>
+                <tr>
+                    <td class="py-3 px-4 text-gray-800">Botellas de Plástico</td>
+                    <td class="py-3 px-4">1 kg</td>
+                    <td class="py-3 px-4">10 puntos</td>
+                    <td class="py-3 px-4 text-sm text-gray-600">Si entregas 2 kg, obtienes 20 puntos</td>
+                </tr>
+                <tr>
+                    <td class="py-3 px-4 text-gray-800">Latas</td>
+                    <td class="py-3 px-4">1 kg</td>
+                    <td class="py-3 px-4">50 puntos</td>
+                    <td class="py-3 px-4 text-sm text-gray-600">1 kg de latas = 50 puntos (S/5 por kg)</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="mt-6 text-sm text-gray-500">
+        También puedes ganar puntos extra por:
+        <ul class="list-disc ml-6 mt-2 space-y-1">
+            <li>Participar en eventos → <span class="text-green-600 font-medium">+50 puntos</span></li>
+            <li>Registrar actividad diaria → <span class="text-green-600 font-medium">+5 puntos</span> por día</li>
         </ul>
-    </section>
+    </div>
+</section>
+
 </main>
 @endsection
