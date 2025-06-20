@@ -11,23 +11,21 @@ class RecompensasController extends Controller
     public function index()
     {
         $user = Auth::user();
-        
-        // Obtener nombre completo formateado
+
         $nombreCompleto = "{$user->name} {$user->apellido_paterno} {$user->apellido_materno}";
-        
-        // Obtener recompensas disponibles y activas
+
         $recompensas = Recompensa::available()
-            ->where(function($query) {
+            ->where(function ($query) {
                 $query->where('EsTemporal', false)
-                    ->orWhere(function($q) {
+                    ->orWhere(function ($q) {
                         $q->where('EsTemporal', true)
-                          ->where('FechaInicio', '<=', now())
-                          ->where('FechaFin', '>=', now());
+                            ->where('FechaInicio', '<=', now())
+                            ->where('FechaFin', '>=', now());
                     });
             })
             ->orderBy('PuntosNecesarios', 'asc')
             ->get();
-        
+
         return view('recompensas', [
             'usuario' => $user,
             'nombreCompleto' => trim($nombreCompleto),
@@ -37,17 +35,23 @@ class RecompensasController extends Controller
     }
 
     public function create()
-{
-    return view('admin.recompensas');
-}
+    {
+        return view('admin.recompensas');
+    }
 
-public function store(Request $request)
-{
-    $validated = $request->validate(Recompensa::rules(), Recompensa::messages());
+    public function store(Request $request)
+    {
+        // Validar incluyendo imagenurl
+        $validated = $request->validate(
+            array_merge(Recompensa::rules(), [
+                'imagenurl' => 'nullable|url|max:255'
+            ]),
+            Recompensa::messages()
+        );
 
-    Recompensa::create($validated);
+        // Crear recompensa con todos los datos
+        Recompensa::create($validated);
 
-    return redirect()->route('admin.recompensas.create')->with('success', 'Recompensa agregada correctamente.');
-}
-
+        return redirect()->route('admin.recompensas.create')->with('success', 'Recompensa agregada correctamente.');
+    }
 }

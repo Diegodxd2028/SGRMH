@@ -9,32 +9,10 @@ class Recompensa extends Model
 {
     use HasFactory;
 
-    /**
-     * The table associated with the model.
-     *
-     * @var string
-     */
     protected $table = 'recompensas';
-
-    /**
-     * The primary key for the model.
-     *
-     * @var string
-     */
     protected $primaryKey = 'CodRecom';
-
-    /**
-     * Indicates if the model's ID is auto-incrementing.
-     *
-     * @var bool
-     */
     public $incrementing = true;
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array
-     */
     protected $fillable = [
         'Titulo',
         'Descripcion',
@@ -43,13 +21,9 @@ class Recompensa extends Model
         'FechaInicio',
         'FechaFin',
         'Stock',
+        'imagenurl',
     ];
 
-    /**
-     * The attributes that should be cast.
-     *
-     * @var array
-     */
     protected $casts = [
         'EsTemporal' => 'boolean',
         'FechaInicio' => 'date',
@@ -58,11 +32,6 @@ class Recompensa extends Model
         'Stock' => 'integer',
     ];
 
-    /**
-     * Validation rules for the model.
-     *
-     * @return array
-     */
     public static function rules()
     {
         return [
@@ -73,14 +42,11 @@ class Recompensa extends Model
             'FechaInicio' => 'nullable|required_if:EsTemporal,true|date|before_or_equal:FechaFin',
             'FechaFin' => 'nullable|required_if:EsTemporal,true|date|after_or_equal:FechaInicio',
             'Stock' => 'required|integer|min:1',
+            // Opcionalmente puedes validar 'imagenurl' aquí si quieres:
+            // 'imagenurl' => 'nullable|url|max:255',
         ];
     }
 
-    /**
-     * Custom error messages for validation rules.
-     *
-     * @return array
-     */
     public static function messages()
     {
         return [
@@ -91,12 +57,6 @@ class Recompensa extends Model
         ];
     }
 
-    /**
-     * Scope for active temporal rewards (between start and end date).
-     *
-     * @param \Illuminate\Database\Eloquent\Builder $query
-     * @return \Illuminate\Database\Eloquent\Builder
-     */
     public function scopeActive($query)
     {
         return $query->where('EsTemporal', true)
@@ -104,44 +64,22 @@ class Recompensa extends Model
             ->where('FechaFin', '>=', now());
     }
 
-    /**
-     * Scope for rewards with available stock.
-     *
-     * @param \Illuminate\Database\Eloquent\Builder $query
-     * @return \Illuminate\Database\Eloquent\Builder
-     */
     public function scopeAvailable($query)
     {
         return $query->where('Stock', '>', 0);
     }
 
-    /**
-     * Check if the reward is currently active (for temporal rewards).
-     *
-     * @return bool
-     */
     public function isActive()
     {
-        if (!$this->EsTemporal) {
-            return true; // Non-temporal rewards are always "active"
-        }
-
+        if (!$this->EsTemporal) return true;
         return now()->between($this->FechaInicio, $this->FechaFin);
     }
 
-    /**
-     * Check if the reward is available (has stock).
-     *
-     * @return bool
-     */
     public function isAvailable()
     {
         return $this->Stock > 0;
     }
 
-    /**
-     * Relación: una recompensa tiene muchos canjes
-     */
     public function canjes()
     {
         return $this->hasMany(Canje::class, 'CodRecom', 'CodRecom');

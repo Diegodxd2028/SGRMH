@@ -46,6 +46,11 @@
         </div>
 
         <div>
+            <label class="block font-medium mb-1">URL de la imagen:</label>
+            <input type="url" name="imagenurl" class="w-full border p-2 rounded" placeholder="https://..." required>
+        </div>
+
+        <div>
             <label class="block font-medium mb-1">¿Es temporal?</label>
             <select name="EsTemporal" class="w-full border p-2 rounded" id="esTemporalSelect">
                 <option value="0">No</option>
