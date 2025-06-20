@@ -7,16 +7,23 @@ use App\Models\User;
 use App\Models\Mensaje;
 use App\Models\Canje;
 use App\Models\Residuo; 
-
+use Illuminate\Support\Facades\DB;
 class AdminController extends Controller
 {
     public function dashboard()
     {
-        $residuosData = Residuo::selectRaw('tipo, SUM(cantidad_kg) as total')
-        ->groupBy('tipo')
-        ->pluck('total', 'tipo');
+        $residuosData = Residuo::select('tipo', DB::raw('SUM(cantidad_kg) as total'))
+                    ->groupBy('tipo')
+                    ->pluck('total', 'tipo');
 
-    return view('admin.dashboard', compact('residuosData'));
+    // Gráfico de usuarios registrados por día (últimos 7 días)
+    $usuariosPorDia = User::whereDate('created_at', '>=', now()->subDays(6))
+        ->select(DB::raw('DATE(created_at) as fecha'), DB::raw('count(*) as total'))
+        ->groupBy('fecha')
+        ->orderBy('fecha')
+        ->pluck('total', 'fecha');
+
+    return view('admin.dashboard', compact('residuosData', 'usuariosPorDia'));
     }
 
     public function mensajes()
