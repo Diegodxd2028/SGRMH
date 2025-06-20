@@ -49,7 +49,8 @@ class CanjeController extends Controller
             'DNI_usuario' => $usuario->DNI,
             'CodRecom' => $codRecompensa,
             'PuntosUtilizados' => $puntosRequeridos,
-            'Cantidad' => $cantidad
+            'Cantidad' => $cantidad,
+            'entregado' => 'pendiente'
         ]);
 
         return redirect()->route('recompensas')->with('success', '¡Canje realizado con éxito!');

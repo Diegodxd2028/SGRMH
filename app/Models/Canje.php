@@ -9,14 +9,12 @@ class Canje extends Model
 {
     use HasFactory;
 
-    // ✅ Usamos la clave primaria por defecto "id", así que quitamos esta línea:
-    // protected $primaryKey = 'CODCanje';
-
     protected $fillable = [
         'DNI_usuario',
         'CodRecom',
         'PuntosUtilizados',
-        'Cantidad'
+        'Cantidad',
+        'entregado' // ✅ Nuevo campo agregado
     ];
 
     // Relación con User

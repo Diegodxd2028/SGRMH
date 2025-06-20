@@ -38,7 +38,7 @@ class RecompensasController extends Controller
             'nombreCompleto' => trim($nombreCompleto),
             'puntos' => $user->Puntos ?? 0,
             'recompensas' => $recompensas,
-            'canjes' => $canjes // 👈 lo enviamos a la vista
+            'canjes' => $canjes 
         ]);
     }
 

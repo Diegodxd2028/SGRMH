@@ -10,10 +10,11 @@ class CreateCanjesTable extends Migration
     {
         Schema::create('canjes', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('DNI_usuario'); // ← CAMBIO CLAVE: ahora es unsignedBigInteger
-            $table->unsignedBigInteger('CodRecom');    // ← Asegúrate que CodRecom es la PK en recompensas
+            $table->unsignedBigInteger('DNI_usuario');
+            $table->unsignedBigInteger('CodRecom');
             $table->integer('PuntosUtilizados');
             $table->integer('Cantidad');
+            $table->enum('entregado', ['pendiente', 'entregado'])->default('pendiente'); 
             $table->timestamps();
 
             // Claves foráneas

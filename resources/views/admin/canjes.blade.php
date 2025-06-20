@@ -17,6 +17,7 @@
                         <th class="border p-2">Cantidad</th>
                         <th class="border p-2">Puntos utilizados</th>
                         <th class="border p-2">Fecha</th>
+                        <th class="border p-2">Estado de Entrega</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -29,6 +30,13 @@
                             <td class="border p-2">{{ $canje->Cantidad }}</td>
                             <td class="border p-2">{{ $canje->PuntosUtilizados }}</td>
                             <td class="border p-2">{{ $canje->created_at->format('d/m/Y H:i') }}</td>
+                            <td class="border p-2 text-center">
+                                @if ($canje->entregado === 'entregado')
+                                    <span class="text-green-600 font-semibold">Entregado</span>
+                                @else
+                                    <span class="text-yellow-600 font-semibold">Pendiente</span>
+                                @endif
+                            </td>
                         </tr>
                     @endforeach
                 </tbody>
