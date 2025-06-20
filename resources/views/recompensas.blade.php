@@ -75,7 +75,41 @@
         </div>
     </section>
 
-    <!-- Sección de Puntos -->
+    <!-- Sección de Historial de Canjes -->
+    <section class="bg-white rounded-xl shadow-md p-6 mb-12">
+        <h2 class="text-xl font-semibold text-gray-800 mb-6">Historial de Recompensas Canjeadas</h2>
+
+        @if($canjes->isEmpty())
+            <p class="text-gray-500">Aún no has canjeado ninguna recompensa.</p>
+        @else
+            <div class="overflow-x-auto">
+                <table class="min-w-full bg-white border border-gray-200 rounded-lg">
+                    <thead class="bg-green-100">
+                        <tr>
+                            <th class="py-3 px-4 text-left text-gray-700 font-semibold">Recompensa</th>
+                            <th class="py-3 px-4 text-left text-gray-700 font-semibold">Cantidad</th>
+                            <th class="py-3 px-4 text-left text-gray-700 font-semibold">Puntos Utilizados</th>
+                            <th class="py-3 px-4 text-left text-gray-700 font-semibold">Fecha</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-gray-200">
+                        @foreach($canjes as $canje)
+                            <tr>
+                                <td class="py-3 px-4 text-gray-800">
+                                    {{ $canje->recompensa->Titulo ?? 'Recompensa eliminada' }}
+                                </td>
+                                <td class="py-3 px-4">{{ $canje->Cantidad }}</td>
+                                <td class="py-3 px-4">{{ $canje->PuntosUtilizados }}</td>
+                                <td class="py-3 px-4">{{ $canje->created_at->format('d/m/Y H:i') }}</td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
+        @endif
+    </section>
+
+    <!-- Sección de Cómo ganar puntos -->
     <section class="bg-white rounded-xl shadow-md p-6">
         <h2 class="text-xl font-semibold text-gray-800 mb-6">¿Cómo ganar más puntos?</h2>
 

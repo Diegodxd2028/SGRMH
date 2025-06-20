@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Recompensa;
+use App\Models\Canje;
 
 class RecompensasController extends Controller
 {
@@ -26,11 +27,18 @@ class RecompensasController extends Controller
             ->orderBy('PuntosNecesarios', 'asc')
             ->get();
 
+        // ✅ Agregamos el historial de canjes
+        $canjes = Canje::with('recompensa')
+            ->where('DNI_usuario', $user->DNI)
+            ->latest()
+            ->get();
+
         return view('recompensas', [
             'usuario' => $user,
             'nombreCompleto' => trim($nombreCompleto),
             'puntos' => $user->Puntos ?? 0,
-            'recompensas' => $recompensas
+            'recompensas' => $recompensas,
+            'canjes' => $canjes // 👈 lo enviamos a la vista
         ]);
     }
 
