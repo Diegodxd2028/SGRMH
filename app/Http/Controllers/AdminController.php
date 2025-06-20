@@ -12,7 +12,11 @@ class AdminController extends Controller
 {
     public function dashboard()
     {
-        return view('admin.dashboard');
+        $residuosData = Residuo::selectRaw('tipo, SUM(cantidad_kg) as total')
+        ->groupBy('tipo')
+        ->pluck('total', 'tipo');
+
+    return view('admin.dashboard', compact('residuosData'));
     }
 
     public function mensajes()
