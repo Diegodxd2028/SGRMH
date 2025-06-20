@@ -119,7 +119,7 @@
                 <!-- Orgánicos -->
                 <div class="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition transform hover:-translate-y-1">
                     <div class="h-48 overflow-hidden">
-                        <img src="https://www.compostandociencia.com/wp-content/uploads/2020/07/compost-1024x683.jpg"
+                        <img src="https://verdeceres.com/wp-content/uploads/organicos-900x560.jpg"
                              alt="Reciclaje orgánico" class="w-full h-full object-cover">
                     </div>
                     <div class="p-4">
