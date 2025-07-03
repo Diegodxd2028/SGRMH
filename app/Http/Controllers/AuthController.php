@@ -62,7 +62,7 @@ class AuthController extends Controller
             'apellido_paterno' => 'required|string|max:50',
             'apellido_materno' => 'required|string|max:50',
             'direccion' => 'required|string|max:50',
-            'Celular' => 'required|numeric|digits:9|unique:users,Celular',
+            'telefono' => 'required|numeric|digits:9|unique:users,telefono',
             'email' => 'required|email|unique:users,email',
             'password' => 'required|min:8|confirmed',
         ]);
@@ -73,7 +73,7 @@ class AuthController extends Controller
             'apellido_paterno' => $validatedData['apellido_paterno'],
             'apellido_materno' => $validatedData['apellido_materno'],
             'direccion' => $validatedData['direccion'],
-            'Celular' => $validatedData['Celular'],
+            'telefono' => $validatedData['telefono'],
             'email' => $validatedData['email'],
             'password' => Hash::make($validatedData['password']),
             'rol' => 'usuario', // rol por defecto

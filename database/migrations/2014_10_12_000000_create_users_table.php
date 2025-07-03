@@ -18,7 +18,7 @@ return new class extends Migration
     $table->string('apellido_paterno');
     $table->string('apellido_materno');
     $table->string('direccion');
-    $table->integer('Celular')->unique();
+    $table->integer('telefono')->unique();
     $table->string('email')->unique();
     $table->timestamp('email_verified_at')->nullable();
     $table->string('password');

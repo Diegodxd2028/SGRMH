@@ -57,10 +57,10 @@
                 </div>
 
                 <div>
-                    <label class="block text-gray-700 font-medium mb-1">Celular:</label>
-                    <input type="number" name="Celular" required
+                    <label class="block text-gray-700 font-medium mb-1">Teléfono:</label>
+                    <input type="number" name="telefono" required
                         class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500"
-                        placeholder="Ingrese su número de celular" value="{{ old('Celular') }}">
+                        placeholder="Ingrese su número de teléfono" value="{{ old('telefono') }}">
                 </div>
 
                 <div>

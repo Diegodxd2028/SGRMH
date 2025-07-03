@@ -15,28 +15,34 @@ class ContactanosController extends Controller
     }
 
     public function store(Request $request) 
-{
-    $request->validate([
-        'nombre' => 'required',
-        'telefono' => 'required',
-        'email' => 'required|email',
-        'asunto' => 'required',
-        'mensaje' => 'required',
-    ]);
+    {
+        $request->validate([
+            'asunto' => 'required',
+            'mensaje' => 'required',
+        ]);
 
-    // Guardar en la base de datos
-    Mensaje::create([
-        'nombre' => $request->nombre,
-        'telefono' => $request->telefono,
-        'email' => $request->email,
-        'asunto' => $request->asunto,
-        'mensaje' => $request->mensaje,
-        'DNI_usuario' => Auth::check() ? Auth::user()->DNI : null,
-    ]);
+        // Obtener usuario autenticado
+        $user = Auth::user();
 
-    // Enviar correo
-    Mail::to('73031584@continental.edu.pe')->send(new ContactanosMailable($request->all()));
+        // Guardar en la base de datos
+        Mensaje::create([
+            'nombre' => $user->name,
+            'telefono' => $user->telefono,
+            'email' => $user->email,
+            'asunto' => $request->asunto,
+            'mensaje' => $request->mensaje,
+            'DNI_usuario' => $user->DNI,
+        ]);
 
-    return redirect()->route('contactanos.index')->with('info', 'Mensaje enviado con éxito');
-}
+        // Preparar datos para el correo
+        $data = [
+            'asunto' => $request->asunto,
+            'mensaje' => $request->mensaje,
+        ];
+
+        // Enviar correo con los datos y el usuario
+        Mail::to('73031584@continental.edu.pe')->send(new ContactanosMailable($data, $user));
+
+        return redirect()->route('contactanos.index')->with('info', 'Mensaje enviado con éxito');
+    }
 }

@@ -3,22 +3,26 @@
 namespace App\Mail;
 
 use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
+use Illuminate\Queue\SerializesModels;
 use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
-use Illuminate\Queue\SerializesModels;
 use Illuminate\Mail\Mailables\Address;
+
 class ContactanosMailable extends Mailable
 {
     use Queueable, SerializesModels;
+
     public $data;
+    public $user;
+
     /**
      * Create a new message instance.
      */
-    public function __construct($data)
+    public function __construct($data, $user)
     {
-        $this->data = $data;
+        $this->data = $data; // asunto y mensaje
+        $this->user = $user; // usuario autenticado
     }
 
     /**
@@ -27,8 +31,8 @@ class ContactanosMailable extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            from: new Address('75174627@continental.edu.pe', 'Juan Espinoza Zarate'),
-            subject: 'Contactanos Mailable',
+            from: new Address('73031584@continental.edu.pe', 'Jefferson Diego Curi Untiveros'),
+            subject: $this->data['asunto'], // Asunto dinámico desde el formulario
         );
     }
 
@@ -44,8 +48,6 @@ class ContactanosMailable extends Mailable
 
     /**
      * Get the attachments for the message.
-     *
-     * @return array<int, \Illuminate\Mail\Mailables\Attachment>
      */
     public function attachments(): array
     {

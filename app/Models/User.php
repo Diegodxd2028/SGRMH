@@ -18,7 +18,7 @@ class User extends Authenticatable
         'apellido_paterno',
         'apellido_materno',
         'direccion',
-        'Celular',
+        'telefono',
         'email',
         'password',
         'Puntos',
@@ -33,7 +33,7 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
         'DNI' => 'integer',
-        'Celular' => 'integer',
+        'telefono' => 'integer',
         'Puntos' => 'integer'
     ];
 
