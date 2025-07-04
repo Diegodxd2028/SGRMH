@@ -101,7 +101,7 @@
         <!-- Columna derecha: Imagen -->
         <div class="hidden md:flex md:w-1/2 items-center justify-center bg-gray-50">
             <div class="text-center">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/cd/Municipalidad_Provincial_de_Huari.svg/603px-Municipalidad_Provincial_de_Huari.svg.png"
+                <img src="https://scontent.fjau2-1.fna.fbcdn.net/v/t39.30808-6/475560504_1161107602728299_6060059517843459211_n.jpg?_nc_cat=100&ccb=1-7&_nc_sid=cc71e4&_nc_ohc=GblJOJpLCJ0Q7kNvwFlEb52&_nc_oc=Admh4OYVC7jvqjurfFsnZCxgEC6sViZxYw1ruZFKSDj8GiOTe51tRCKlDuLcSEuevFD-GfmtBG_bmhNfjJKyBx-e&_nc_zt=23&_nc_ht=scontent.fjau2-1.fna&_nc_gid=1rSMyJ5ZDquJQhdw5bS6zw&oh=00_AfO_rBwbmtleXqDM5lXJzLLq5r7r10x2gvLUMcqP26g2AA&oe=686D9078"
                      alt="Logo Municipalidad de Huari"
                      class="w-3/4 h-auto mx-auto object-contain">
             </div>

@@ -58,9 +58,17 @@ Route::post('/canjes', [CanjeController::class, 'store'])->name('canjes.store')-
 
 // ------------------- RUTAS EXCLUSIVAS PARA ADMIN -------------------
 Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(function () {
+
+    // Dashboard y vistas generales
     Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('dashboard');
     Route::get('/mensajes', [AdminController::class, 'mensajes'])->name('mensajes');
+
+    // Canjes
     Route::get('/canjes', [AdminController::class, 'canjes'])->name('canjes');
+    Route::post('/canjes/{id}/entregar', [AdminController::class, 'marcarComoEntregado'])->name('canjes.entregar');
+    Route::post('/canjes/{id}/entregar-con-password', [AdminController::class, 'entregarConPassword'])->name('canjes.entregar.contraseña');
+
+    // Puntos
     Route::get('/puntos', [AdminController::class, 'mostrarFormularioPuntos'])->name('puntos');
     Route::post('/puntos', [AdminController::class, 'asignarPuntos'])->name('puntos.asignar');
 
@@ -68,11 +76,13 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(fun
     Route::get('/recompensas', [RecompensasController::class, 'create'])->name('recompensas.create');
     Route::post('/recompensas', [RecompensasController::class, 'store'])->name('recompensas.store');
     Route::get('/recompensas/{id}/edit', [RecompensasController::class, 'edit'])->name('recompensas.edit');
-Route::put('/recompensas/{id}', [RecompensasController::class, 'update'])->name('recompensas.update');
-Route::delete('/recompensas/{id}', [RecompensasController::class, 'destroy'])->name('recompensas.destroy');
-    // CRUD completo de campañas (admin)
+    Route::put('/recompensas/{id}', [RecompensasController::class, 'update'])->name('recompensas.update');
+    Route::delete('/recompensas/{id}', [RecompensasController::class, 'destroy'])->name('recompensas.destroy');
+
+    // Gestión de campañas
     Route::resource('/campañas', CampañaController::class)->names('campañas');
 });
+
 
 // ------------------- CAMPAÑAS PARA USUARIOS -------------------
 Route::middleware('auth')->group(function () {
