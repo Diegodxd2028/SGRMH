@@ -19,9 +19,9 @@
 
         <!-- Columna derecha: Formulario -->
         <div class="w-full md:w-1/2 p-8 md:p-12 relative">
-            <!-- Botón Atrás - Posición corregida -->
+            <!-- Botón Atrás - Estilo corregido -->
             <a href="{{ route('seleccionar-rol') }}"
-               class="absolute top-6 left-6 text-gray-500 hover:text-primary-600 transition flex items-center text-sm font-medium">
+               class="absolute top-6 left-6 text-gray-600 hover:text-primary-600 transition flex items-center text-sm font-medium">
                 <svg class="w-5 h-5 mr-1" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" />
                 </svg>
@@ -80,27 +80,12 @@
                         </div>
                     </div>
 
-                    <div class="flex items-center justify-between">
-                        <div class="flex items-center">
-                            <input id="remember-me" name="remember-me" type="checkbox" class="h-4 w-4 text-primary-600 focus:ring-primary-500 border-gray-300 rounded">
-                            <label for="remember-me" class="ml-2 block text-sm text-gray-700">Recordarme</label>
-                        </div>
-                        @if($rol === 'usuario')
-                            <div class="text-sm">
-                                <a href="#" class="font-medium text-primary-600 hover:text-primary-500">¿Olvidaste tu contraseña?</a>
-                            </div>
-                        @endif
-                    </div>
-
-                    <div>
-                        <button type="submit"
-                            class="w-full bg-primary-600 hover:bg-primary-700 text-white font-medium py-3 px-4 rounded-lg transition duration-200 flex items-center justify-center">
-                            <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1" />
-                            </svg>
-                            Iniciar Sesión
-                        </button>
-                    </div>
+                   <div>
+                    <button type="submit"
+                        class="w-full bg-blue-500 text-white py-2 rounded-lg hover:bg-blue-600 transition duration-200">
+                        Iniciar Sesión
+                    </button>
+                </div>
                 </form>
 
                 @if($rol === 'usuario')
