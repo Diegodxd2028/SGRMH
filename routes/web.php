@@ -67,7 +67,9 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(fun
     // Gestión de recompensas
     Route::get('/recompensas', [RecompensasController::class, 'create'])->name('recompensas.create');
     Route::post('/recompensas', [RecompensasController::class, 'store'])->name('recompensas.store');
-
+    Route::get('/recompensas/{id}/edit', [RecompensasController::class, 'edit'])->name('recompensas.edit');
+Route::put('/recompensas/{id}', [RecompensasController::class, 'update'])->name('recompensas.update');
+Route::delete('/recompensas/{id}', [RecompensasController::class, 'destroy'])->name('recompensas.destroy');
     // CRUD completo de campañas (admin)
     Route::resource('/campañas', CampañaController::class)->names('campañas');
 });

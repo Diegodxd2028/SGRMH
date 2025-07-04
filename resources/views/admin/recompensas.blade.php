@@ -3,8 +3,7 @@
 @section('title', 'Agregar Recompensa')
 
 @section('content')
-<div class="container mx-auto p-6 max-w-2xl">
-    <h1 class="text-2xl font-bold mb-6">Agregar Nueva Recompensa</h1>
+<div class="container mx-auto p-6 max-w-4xl">
 
     @if ($errors->any())
         <div class="bg-red-100 text-red-700 p-4 rounded mb-4">
@@ -22,6 +21,7 @@
         </div>
     @endif
 
+    <!-- Formulario -->
     <form action="{{ route('admin.recompensas.store') }}" method="POST" class="space-y-4">
         @csrf
 
@@ -74,6 +74,55 @@
             Guardar Recompensa
         </button>
     </form>
+
+    <!-- Tabla de recompensas existentes -->
+    @if($recompensas->count())
+        <h2 class="text-xl font-bold mt-10 mb-4">Recompensas Registradas</h2>
+
+        <div class="overflow-x-auto bg-white rounded shadow">
+            <table class="min-w-full text-sm text-left">
+                <thead class="bg-green-100 text-gray-700">
+                    <tr>
+                        <th class="px-4 py-2">Título</th>
+                        <th class="px-4 py-2">Puntos</th>
+                        <th class="px-4 py-2">Stock</th>
+                        <th class="px-4 py-2">Temporal</th>
+                        <th class="px-4 py-2">Imagen</th>
+                        <th class="px-4 py-2">Acciones</th>
+                    </tr>
+                </thead>
+                <tbody class="divide-y">
+                    @foreach($recompensas as $r)
+                        <tr>
+                            <td class="px-4 py-2">{{ $r->Titulo }}</td>
+                            <td class="px-4 py-2">{{ $r->PuntosNecesarios }}</td>
+                            <td class="px-4 py-2">{{ $r->Stock }}</td>
+                            <td class="px-4 py-2">
+                                {{ $r->EsTemporal ? 'Sí' : 'No' }}
+                                @if($r->EsTemporal)
+                                    <br><span class="text-xs text-gray-500">({{ $r->FechaInicio }} - {{ $r->FechaFin }})</span>
+                                @endif
+                            </td>
+                            <td class="px-4 py-2">
+                                <img src="{{ $r->imagenurl }}" alt="Imagen" class="h-12 rounded shadow">
+                            </td>
+                            <td class="px-4 py-2 space-x-2">
+                                <a href="{{ route('admin.recompensas.edit', $r->CodRecom) }}"
+                                   class="text-blue-600 hover:underline text-sm">Editar</a>
+
+                                <form action="{{ route('admin.recompensas.destroy', $r->CodRecom) }}" method="POST" class="inline">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" onclick="return confirm('¿Eliminar esta recompensa?')"
+                                            class="text-red-600 hover:underline text-sm">Eliminar</button>
+                                </form>
+                            </td>
+                        </tr>
+                    @endforeach
+                </tbody>
+            </table>
+        </div>
+    @endif
 </div>
 
 <script>

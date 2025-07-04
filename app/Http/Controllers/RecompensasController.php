@@ -9,6 +9,7 @@ use App\Models\Canje;
 
 class RecompensasController extends Controller
 {
+    // Mostrar recompensas para el usuario autenticado
     public function index()
     {
         $user = Auth::user();
@@ -27,7 +28,6 @@ class RecompensasController extends Controller
             ->orderBy('PuntosNecesarios', 'asc')
             ->get();
 
-        // ✅ Agregamos el historial de canjes
         $canjes = Canje::with('recompensa')
             ->where('DNI_usuario', $user->DNI)
             ->latest()
@@ -42,24 +42,58 @@ class RecompensasController extends Controller
         ]);
     }
 
+    // Vista de administrador para crear y ver recompensas
     public function create()
     {
-        return view('admin.recompensas');
+        $recompensas = Recompensa::orderBy('created_at', 'desc')->get();
+        return view('admin.recompensas', compact('recompensas'));
     }
 
+    // Guardar nueva recompensa
     public function store(Request $request)
     {
-        // Validar incluyendo imagenurl
         $validated = $request->validate(
             array_merge(Recompensa::rules(), [
-                'imagenurl' => 'nullable|url|max:255'
+                'imagenurl' => 'required|url|max:255'
             ]),
             Recompensa::messages()
         );
 
-        // Crear recompensa con todos los datos
         Recompensa::create($validated);
 
         return redirect()->route('admin.recompensas.create')->with('success', 'Recompensa agregada correctamente.');
+    }
+
+    // Editar recompensa
+    public function edit($id)
+    {
+        $recompensa = Recompensa::findOrFail($id);
+        return view('admin.edit-recompensa', compact('recompensa'));
+    }
+
+    // Actualizar recompensa
+    public function update(Request $request, $id)
+    {
+        $recompensa = Recompensa::findOrFail($id);
+
+        $validated = $request->validate(
+            array_merge(Recompensa::rules(), [
+                'imagenurl' => 'required|url|max:255'
+            ]),
+            Recompensa::messages()
+        );
+
+        $recompensa->update($validated);
+
+        return redirect()->route('admin.recompensas.create')->with('success', 'Recompensa actualizada correctamente.');
+    }
+
+    // Eliminar recompensa
+    public function destroy($id)
+    {
+        $recompensa = Recompensa::findOrFail($id);
+        $recompensa->delete();
+
+        return redirect()->route('admin.recompensas.create')->with('success', 'Recompensa eliminada correctamente.');
     }
 }
