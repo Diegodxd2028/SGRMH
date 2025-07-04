@@ -8,6 +8,7 @@ use App\Models\Mensaje;
 use App\Models\Canje;
 use App\Models\Residuo; 
 use Illuminate\Support\Facades\DB;
+
 class AdminController extends Controller
 {
     public function dashboard()
@@ -16,14 +17,24 @@ class AdminController extends Controller
                     ->groupBy('tipo')
                     ->pluck('total', 'tipo');
 
-    // Gráfico de usuarios registrados por día (últimos 7 días)
-    $usuariosPorDia = User::whereDate('created_at', '>=', now()->subDays(6))
-        ->select(DB::raw('DATE(created_at) as fecha'), DB::raw('count(*) as total'))
-        ->groupBy('fecha')
-        ->orderBy('fecha')
-        ->pluck('total', 'fecha');
+        $usuariosPorDia = User::whereDate('created_at', '>=', now()->subDays(6))
+            ->select(DB::raw('DATE(created_at) as fecha'), DB::raw('count(*) as total'))
+            ->groupBy('fecha')
+            ->orderBy('fecha')
+            ->pluck('total', 'fecha');
 
-    return view('admin.dashboard', compact('residuosData', 'usuariosPorDia'));
+        // NUEVOS DATOS DINÁMICOS PARA LAS TARJETAS
+        $usuariosTotales = User::count();
+        $canjesTotales = Canje::count();
+        $residuosTotales = Residuo::sum('cantidad_kg');
+
+        return view('admin.dashboard', compact(
+            'residuosData',
+            'usuariosPorDia',
+            'usuariosTotales',
+            'canjesTotales',
+            'residuosTotales'
+        ));
     }
 
     public function mensajes()
@@ -46,7 +57,6 @@ class AdminController extends Controller
 
     public function asignarPuntos(Request $request)
     {
-        // ✅ Validamos todos los campos necesarios
         $request->validate([
             'dni' => 'required|exists:users,DNI',
             'puntos' => 'required|integer|min:1',
@@ -56,14 +66,11 @@ class AdminController extends Controller
             'dni.exists' => 'El usuario con ese DNI no existe.',
         ]);
 
-        // ✅ Buscamos al usuario por DNI
         $usuario = User::where('DNI', $request->dni)->first();
 
-        // ✅ Sumamos los puntos al usuario
         $usuario->Puntos += $request->puntos;
         $usuario->save();
 
-        // ✅ Registramos el residuo
         Residuo::create([
             'user_id' => $usuario->id,
             'tipo' => $request->tipo_residuo,

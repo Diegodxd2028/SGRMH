@@ -7,10 +7,9 @@ use App\Http\Controllers\RecompensasController;
 use App\Http\Controllers\ParticipacionController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ContactanosController;
-use App\Mail\ContactanosMailable;
-use Illuminate\Support\Facades\Mail;
 use App\Http\Controllers\CanjeController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\CampañaController;
 
 // Pantalla previa para elegir tipo de acceso
 Route::get('/', function () {
@@ -64,7 +63,17 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(fun
     Route::get('/canjes', [AdminController::class, 'canjes'])->name('canjes');
     Route::get('/puntos', [AdminController::class, 'mostrarFormularioPuntos'])->name('puntos');
     Route::post('/puntos', [AdminController::class, 'asignarPuntos'])->name('puntos.asignar');
+
     // Gestión de recompensas
     Route::get('/recompensas', [RecompensasController::class, 'create'])->name('recompensas.create');
     Route::post('/recompensas', [RecompensasController::class, 'store'])->name('recompensas.store');
+
+    // CRUD completo de campañas (admin)
+    Route::resource('/campañas', CampañaController::class)->names('campañas');
+});
+
+// ------------------- CAMPAÑAS PARA USUARIOS -------------------
+Route::middleware('auth')->group(function () {
+    Route::get('/campañas', [CampañaController::class, 'indexPublic'])->name('campañas.index');
+    Route::post('/campañas/participar/{id}', [CampañaController::class, 'participar'])->name('campañas.participar');
 });
